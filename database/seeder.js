@@ -44,32 +44,18 @@ const createSimilarProductsLine = (property, type) => {
   return productsLine;
 };
 
-const bottomProducts = () => {
-  let botProductsArr = [];
-  for (let i = 0; i < 20; i++) {
-    botProductsArr.push(createSimilarProductsLine('bottom', 'Shorts'));
-    botProductsArr.push(createSimilarProductsLine('bottom', 'Pants'));
-    botProductsArr.push(createSimilarProductsLine('bottom', 'Skirts'));
-  }
-  return botProductsArr;
-}
-
-const topProducts = () => {
-  let topProductsArr = [];
-  for (let i = 0; i < 20; i++) {
-    topProductsArr.push(createSimilarProductsLine('top', 'Dresses'));
-    topProductsArr.push(createSimilarProductsLine('top', 'Tanks'));
-    topProductsArr.push(createSimilarProductsLine('top', 'Sweaters'));
-  }
-  return topProductsArr;
-}
-
 const combineProducts = () => {
-  let bottData = bottomProducts();
-  let topData = topProducts()
-  return [...bottData, ...topData];
+  let allProducts = [];
+  for (let i = 0; i < 20; i++) {
+    allProducts.push(createSimilarProductsLine('bottom', 'Shorts'));
+    allProducts.push(createSimilarProductsLine('bottom', 'Pants'));
+    allProducts.push(createSimilarProductsLine('bottom', 'Skirts'));
+    allProducts.push(createSimilarProductsLine('top', 'Dresses'));
+    allProducts.push(createSimilarProductsLine('top', 'Tanks'));
+    allProducts.push(createSimilarProductsLine('top', 'Sweaters'));
+  }
+  return allProducts;
 }
-
 
 // seeding data
 const insertData = () => {
