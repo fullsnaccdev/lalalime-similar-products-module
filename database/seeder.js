@@ -1,7 +1,9 @@
 const Lalalime = require('./index.js');
 const faker = require('faker');
 const fs = require('file-system');
+// const clothing = fs.createWriteStream('megafile1.csv');
 const clothing = fs.createWriteStream('megafile1.json');
+
 
 // data
 const price = ['$38.00 USD', '$48.00 USD', '$58.00 USD', '$68.00 USD','$78.00 USD','$88.00 USD','$98.00 USD','$108.00 USD','$118.00 USD','$128.00 USD','$138.00 USD'];
@@ -64,7 +66,15 @@ const createSimilarProductsLine = (type, index) => {
   productsLine.price = createPrice();
   productsLine.img = [];
   for (let i = 1; i < 5; i++) {
-    productsLine.img.push(faker.image.fashion());
+    let item = [];
+    for (let j = 1; j < 3; j++) {
+      let colors = [];
+      colors.push(`color${j}`);
+      colors.push(faker.image.fashion());
+      colors.push(faker.image.fashion());
+      item.push(colors);
+    }
+    productsLine.img.push(item);
   }
   return productsLine;
 };
@@ -100,25 +110,30 @@ const createSimilarProductsLine = (type, index) => {
 // };
 
 function writeTenMillionTimes(writer, encoding, callback) {
-  let i = 10;
+  let i = 1999999;
+  let id = 10000001;
   write();
   function write() {
     let ok = true;
     do {
-      if (i === 10) {
+      // for postgreSQL csv version
+      // let header = "id, property, type, title, price" + "\n";
+
+      if (i === 1999999) {
         // // creating an entry with a random type i.e. "Shorts", "Pants", etc.
         // const data = JSON.stringify(createSimilarProductsLine(type[Math.floor(Math.random() * Math.floor(type.length))], i + 11)) + ',\n';
 
         // creating an entry with a specific type i.e. "Shorts"
-        const data = JSON.stringify(createSimilarProductsLine("Shorts", i)) + ',\n';
+        const data = JSON.stringify(createSimilarProductsLine("Sweaters", id)) + ',\n';
         ok = writer.write('[' + data, encoding)
       }
       i--;
+      id++;
       // // creating an entry with a random type i.e. "Shorts", "Pants", etc.
       // const data = JSON.stringify(createSimilarProductsLine(type[Math.floor(Math.random() * Math.floor(type.length))], i + 11)) + ',\n';
 
       // creating an entry with a specific type i.e. "Shorts"
-      const data = JSON.stringify(createSimilarProductsLine("Shorts", i)) + ',\n';
+      const data = JSON.stringify(createSimilarProductsLine("Sweaters", id)) + ',\n';
       if (i === 0) {
         // Last time!
         console.log('you are free!');
@@ -138,7 +153,7 @@ function writeTenMillionTimes(writer, encoding, callback) {
 }
 writeTenMillionTimes(clothing, 'utf-8', () => clothing.end());
 
-// mongoimport -d products -c lalalimes --file megafile.json --jsonArray
+// mongoimport -d lalalime -c similarproducts --file megafile2.json --jsonArray
 
 // seeding data
 // const insertData = () => {
