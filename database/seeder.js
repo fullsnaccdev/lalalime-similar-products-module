@@ -1,7 +1,7 @@
 const Lalalime = require('./index.js');
 const faker = require('faker');
 const fs = require('file-system');
-const clothing = fs.createWriteStream('megafile.json');
+const clothing = fs.createWriteStream('megafile1.json');
 
 // data
 const price = ['$38.00 USD', '$48.00 USD', '$58.00 USD', '$68.00 USD','$78.00 USD','$88.00 USD','$98.00 USD','$108.00 USD','$118.00 USD','$128.00 USD','$138.00 USD'];
@@ -55,8 +55,9 @@ const createPrice = () => {
 //   return productsLine;
 // };
 
-const createSimilarProductsLine = (type) => {
+const createSimilarProductsLine = (type, index) => {
   let productsLine = {};
+  productsLine.index = index;
   productsLine.property = findCategory(type);
   productsLine.type = type;
   productsLine.title = createTitle(name);
@@ -99,17 +100,25 @@ const createSimilarProductsLine = (type) => {
 // };
 
 function writeTenMillionTimes(writer, encoding, callback) {
-  let i = 4000000;
+  let i = 10;
   write();
   function write() {
     let ok = true;
     do {
-      if (i === 4000000) {
-        const data = JSON.stringify(createSimilarProductsLine(type[Math.floor(Math.random() * Math.floor(type.length))])) + ',\n';
+      if (i === 10) {
+        // // creating an entry with a random type i.e. "Shorts", "Pants", etc.
+        // const data = JSON.stringify(createSimilarProductsLine(type[Math.floor(Math.random() * Math.floor(type.length))], i + 11)) + ',\n';
+
+        // creating an entry with a specific type i.e. "Shorts"
+        const data = JSON.stringify(createSimilarProductsLine("Shorts", i)) + ',\n';
         ok = writer.write('[' + data, encoding)
       }
       i--;
-      const data = JSON.stringify(createSimilarProductsLine(type[Math.floor(Math.random() * Math.floor(type.length))])) + ',\n';
+      // // creating an entry with a random type i.e. "Shorts", "Pants", etc.
+      // const data = JSON.stringify(createSimilarProductsLine(type[Math.floor(Math.random() * Math.floor(type.length))], i + 11)) + ',\n';
+
+      // creating an entry with a specific type i.e. "Shorts"
+      const data = JSON.stringify(createSimilarProductsLine("Shorts", i)) + ',\n';
       if (i === 0) {
         // Last time!
         console.log('you are free!');
