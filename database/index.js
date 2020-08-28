@@ -22,7 +22,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 // Connection URL
-const url = 'mongodb://localhost:27017/products';
+const url = 'mongodb://localhost:27017/lalalime';
 
 // Use connect method to connect to the server
 MongoClient.connect(url, {
@@ -30,5 +30,5 @@ MongoClient.connect(url, {
   useUnifiedTopology: true
 }, (err, client) => {
   assert.equal(null, err);
-  const db = client.db('products');
+  const db = client.db('lalalime');
 })
