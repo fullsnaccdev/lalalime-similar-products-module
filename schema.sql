@@ -12,5 +12,6 @@ CREATE TABLE products (
 CREATE TABLE images (
   id SERIAL,
   imgurl VARCHAR(255) NOT NULL,
-  productID INT NOT NULL,
+  color VARCHAR(255) NOT NULL,
+  productID INT NOT NULL
 );
