@@ -167,7 +167,7 @@ function writeTenMillionTimesPSQLproducts(writer, encoding, callback) {
 
 // writeTenMillionTimesPSQLproducts(production, 'utf-8', () => production.end());
 
-// \copy products (property, type, title, price) from megafile3.csv DELIMITER ',' CSV HEADER;
+// \copy products (property, type, title, price) from production1.csv DELIMITER ',' CSV HEADER;
 
 
 //////////////////////////////////// creating image data ///////////////////////////////////////////
@@ -175,8 +175,8 @@ function writeTenMillionTimesPSQLproducts(writer, encoding, callback) {
 const imageProduction = fs.createWriteStream('imageProduction6.csv');
 
 function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
-  let i = 1999999;
-  let id = 10000001;
+  let i = 19;
+  let id = 1;
   write();
   function write() {
     let ok = true;
@@ -185,7 +185,7 @@ function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
       // let header = "id, property, type, title, price" + "\n";
       // for postgreSQL csv version of the image
       let header = "imgurl, color, productID" + "\n";
-      if (i === 1999999) {
+      if (i === 19) {
         // for product
         // ok = writer.write(header, encoding);
         // writer.once('drain', write);
@@ -241,7 +241,7 @@ function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
 }
 writeTenMillionTimesPSQLimg(imageProduction, 'utf-8', () => imageProduction.end());
 
-// \copy images (imgurl, color, productID) from megafile2.csv DELIMITER ',' CSV HEADER;
+// \copy images (imgurl, color, productID) from imageProduction1.csv DELIMITER ',' CSV HEADER;
 
 
 
