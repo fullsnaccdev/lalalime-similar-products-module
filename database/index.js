@@ -18,7 +18,7 @@
 // module.exports = Lalalime;
 
 
-// mongoDB connection
+//////////////////////////////////////// mongoDB connection ////////////////////////////////////////
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 // Connection URL
@@ -32,3 +32,6 @@ MongoClient.connect(url, {
   assert.equal(null, err);
   const db = client.db('lalalime');
 })
+
+/////////////////////////////////////// psql connection /////////////////////////////////////////
+

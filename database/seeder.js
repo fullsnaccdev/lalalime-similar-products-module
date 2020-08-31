@@ -175,8 +175,8 @@ function writeTenMillionTimesPSQLproducts(writer, encoding, callback) {
 const imageProduction = fs.createWriteStream('imageProduction6.csv');
 
 function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
-  let i = 19;
-  let id = 1;
+  let i = 1999999;
+  let id = 10000001;
   write();
   function write() {
     let ok = true;
@@ -185,7 +185,7 @@ function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
       // let header = "id, property, type, title, price" + "\n";
       // for postgreSQL csv version of the image
       let header = "imgurl, color, productID" + "\n";
-      if (i === 19) {
+      if (i === 1999999) {
         // for product
         // ok = writer.write(header, encoding);
         // writer.once('drain', write);
@@ -212,21 +212,15 @@ function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
         // Last time!
         console.log('you are free!');
         for (let i = 1; i < 3; i++) {
-          if (i === 2) {
-            const data = createSimilarProductImg(id, i) + '\n';
-            writer.write(data, encoding);
-            writer.write((data.slice(0, -1)), encoding, callback);
-          } else {
-            const data = createSimilarProductImg(id, i) + '\n';
-            writer.write(data, encoding);
-            writer.write(data, encoding);
+          let data = createSimilarProductImg(id, i) + '\n';
+          writer.write(data, encoding);
+          writer.write(data, encoding);
           }
-        }
       } else {
         // See if we should continue, or wait.
         // Don't pass the callback, because we're not done yet.
         for (let i = 1; i < 3; i++) {
-          const data = createSimilarProductImg(id, i) + '\n';
+          let data = createSimilarProductImg(id, i) + '\n';
           ok = writer.write(data, encoding);
           ok = writer.write(data, encoding);
         }
@@ -253,9 +247,6 @@ writeTenMillionTimesPSQLimg(imageProduction, 'utf-8', () => imageProduction.end(
 // }
 
 // insertData();
-
-
-
 
 
 
