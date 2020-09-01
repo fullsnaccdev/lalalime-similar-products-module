@@ -12,6 +12,7 @@ class App extends Component {
       title: [],
       price: [],
       img: [],
+      id: window.location.pathname.slice(1, -1)
     }
     this.getComponents = this.getComponents.bind(this);
   }
@@ -22,14 +23,15 @@ class App extends Component {
 
   getComponents() {
     axios
-    .get('/api/similar_products')
+    .get(`/api/similar_products/${this.state.id}`)
     .then((res) => {
-      let idx = Math.floor(Math.random() * 60)
+      console.log(res);
+      let idx = 0;
       this.setState({
-      title: res.data[idx]['title'],
-      price: res.data[idx]['price'],
-      img: res.data[idx]['img']
-    }, () => console.log('title', res.data[idx]))})
+      title: res.data['title'],
+      price: res.data['price'],
+      img: res.data['img']
+    }, () => console.log('title', res.data))})
     .catch((err) => console.log('title',err))
   }
 
