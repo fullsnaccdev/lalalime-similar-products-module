@@ -117,10 +117,11 @@ const createSimilarProduct = (type) => {
   return resultString;
 };
 
-const createSimilarProductImg = (index, colorIndex) => {
-  let resultString = `${faker.image.image()}, color${colorIndex}, ${index}`;
-  return resultString;
-}
+// const createSimilarProductImg = (index, colorIndex) => {
+//   let resultString = `${faker.image.image()}, color${colorIndex}, ${index}`;
+//   return resultString;
+// }
+
 
 //////////////////////////////////// creating product data ///////////////////////////////////////////
 
@@ -172,68 +173,157 @@ function writeTenMillionTimesPSQLproducts(writer, encoding, callback) {
 
 //////////////////////////////////// creating image data ///////////////////////////////////////////
 
-const imageProduction = fs.createWriteStream('imageProduction6.csv');
+const imageProduction = fs.createWriteStream('imageProduction1.csv');
+
+// https://lalalimes.s3-us-west-1.amazonaws.com/lalalimeimages/Dresses/product1/color1/Dresses1.jpeg
+
+
 
 function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
-  let i = 1999999;
-  let id = 10000001;
+  let i = 1;
+  let id = 1;
+  let item = 1;
+  let colorIndex = 1;
   write();
   function write() {
     let ok = true;
     do {
-      // for postgreSQL csv version of the product
-      // let header = "id, property, type, title, price" + "\n";
-      // for postgreSQL csv version of the image
+      const createSimilarProductImg = (id, colorIndex, type, imageNumber) => {
+        let resultString = `https://tinyurl.com/lalalime-${type}${imageNumber}, color${colorIndex}, ${id}`;
+        return resultString;
+      }
       let header = "imgurl, color, productID" + "\n";
-      if (i === 1999999) {
-        // for product
-        // ok = writer.write(header, encoding);
-        // writer.once('drain', write);
-        // const data = createSimilarProduct("Shorts", id) + '\n';
-        // ok = writer.write(data, encoding);
 
-        // for image
+      if (i === 1) {
         ok = writer.write(header, encoding);
         writer.once('drain', write);
-        for (let i = 1; i < 3; i++) {
-          const data = createSimilarProductImg(id, i) + '\n';
+        for (let j = 1; j < 25; j++) {
+          const data = createSimilarProductImg(id, colorIndex, 'Shorts', j) + '\n';
           ok = writer.write(data, encoding);
-          ok = writer.write(data, encoding);
+          item++;
+          if (item > 3) {
+            colorIndex++;
+            item = 1;
+          }
+          if (colorIndex > 2) {
+            colorIndex = 1
+          }
+        }
+      }
+
+      i++;
+      id++;
+
+      if (i === 2000) {
+        // Last time!
+        for (let j = 1; j < 25; j++) {
+          if (j === 24) {
+            console.log('you are free!');
+            const data = createSimilarProductImg(id, colorIndex, 'Shorts', j) + '\n';
+            ok = writer.write((data.slice(0, -1)), encoding, callback);
+          } else {
+            const data = createSimilarProductImg(id, colorIndex, 'Shorts', j) + '\n';
+            ok = writer.write(data, encoding);
+            item++;
+            if (item > 3) {
+              colorIndex++;
+              item = 1;
+            }
+            if (colorIndex > 2) {
+              colorIndex = 1
+            }
+          }
         }
 
-      }
-      i--;
-      id++;
-      // creating an entry for products
-      // const data = createSimilarProduct("Shorts", id) + '\n';
-      // create an entry for images
-
-      if (i === 0) {
-        // Last time!
-        console.log('you are free!');
-        for (let i = 1; i < 3; i++) {
-          let data = createSimilarProductImg(id, i) + '\n';
-          writer.write(data, encoding);
-          writer.write(data, encoding);
-          }
       } else {
         // See if we should continue, or wait.
         // Don't pass the callback, because we're not done yet.
-        for (let i = 1; i < 3; i++) {
-          let data = createSimilarProductImg(id, i) + '\n';
+        for (let j = 1; j < 25; j++) {
+          const data = createSimilarProductImg(id, colorIndex, 'Shorts', j) + '\n';
           ok = writer.write(data, encoding);
-          ok = writer.write(data, encoding);
+          item++;
+          if (item > 3) {
+            colorIndex++;
+            item = 1;
+          }
+          if (colorIndex > 2) {
+            colorIndex = 1
+          }
         }
       }
-    } while (i > 0 && ok);
-    if (i > 0) {
+    } while (i < 1999 && ok);
+    if (i < 1999) {
       // Had to stop early!
       // Write some more once it drains.
       writer.once('drain', write);
     }
   }
 }
+
+// function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
+//   let i = 39;
+//   let id = 1;
+//   let productNumber = 1
+//   write();
+//   function write() {
+//     let ok = true;
+//     do {
+//       // for postgreSQL csv version of the product
+//       // let header = "id, property, type, title, price" + "\n";
+//       // for postgreSQL csv version of the image
+//       let header = "imgurl, color, productID" + "\n";
+//       if (i === 39) {
+
+//         const createSimilarProductImg = (index, colorIndex, type, productNumber) => {
+//           let resultString = `https://lalalimes.s3-us-west-1.amazonaws.com/lalalimeimages/${type}/product${productNumber}color${colorIndex}/${type}1.jpeg, color${colorIndex}, ${index}`;
+//           return resultString;
+//         }
+//         // for image
+//         ok = writer.write(header, encoding);
+//         writer.once('drain', write);
+//         for (let j = 1; j < 3; j++) {
+//           const data = createSimilarProductImg(id, j, 'Shorts', productNumber) + '\n';
+//           ok = writer.write(data, encoding);
+//           ok = writer.write(data, encoding);
+//         }
+
+//       }
+//       i--;
+//       id++;
+//       productNumber++;
+//       // creating an entry for products
+//       // const data = createSimilarProduct("Shorts", id) + '\n';
+//       // create an entry for images
+
+//       if (i === 0) {
+//         // Last time!
+//         console.log('you are free!');
+//         for (let j = 1; j < 3; j++) {
+//           let data = createSimilarProductImg(id, j) + '\n';
+//           writer.write(data, encoding);
+//           writer.write(data, encoding);
+//           }
+//       } else {
+//         // See if we should continue, or wait.
+//         // Don't pass the callback, because we're not done yet.
+//         for (let j = 1; j < 3; j++) {
+//           let data = createSimilarProductImg(id, j) + '\n';
+//           ok = writer.write(data, encoding);
+//           ok = writer.write(data, encoding);
+//         }
+//       }
+//     } while (i > 0 && ok);
+//     if (i > 0) {
+//       // Had to stop early!
+//       // Write some more once it drains.
+//       writer.once('drain', write);
+//     }
+//   }
+// }
+
+
 writeTenMillionTimesPSQLimg(imageProduction, 'utf-8', () => imageProduction.end());
+
 
 // \copy images (imgurl, color, productID) from imageProduction1.csv DELIMITER ',' CSV HEADER;
 
