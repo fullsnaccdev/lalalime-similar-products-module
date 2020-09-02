@@ -16,35 +16,35 @@ const controller = {
       if (err) {
         res.status(404).send(err)
       }
-      let productList = {};
-      productList.id = [];
-      productList.title = [];
-      productList.price = [];
-      productList.img = [];
-      let img;
-      let color = [];
-      let colorContainer = [];
-      results = results.rows
-      for (let i = 0; i < results.length; i++) {
-        if (i === 0 || i === 6 || i === 12 || i === 18) {
-          productList.id.push(results[i].productid);
-          productList.title.push(results[i].title);
-          productList.price.push(results[i].price);
-          colorContainer = [];
-        }
-        if (color.length < 1) {
-          color.push(results[i].color)
-        }
-        color.push(results[i].imgurl);
-        if (color.length === 4) {
-          colorContainer.push(color);
-          color = [];
-        }
-        if (colorContainer.length === 2) {
-          productList.img.push(colorContainer)
-        }
-      }
-      res.status(200).send(productList)
+      // let productList = {};
+      // productList.id = [];
+      // productList.title = [];
+      // productList.price = [];
+      // productList.img = [];
+      // let img;
+      // let color = [];
+      // let colorContainer = [];
+      // results = results.rows
+      // for (let i = 0; i < results.length; i++) {
+      //   if (i === 0 || i === 6 || i === 12 || i === 18) {
+      //     productList.id.push(results[i].productid);
+      //     productList.title.push(results[i].title);
+      //     productList.price.push(results[i].price);
+      //     colorContainer = [];
+      //   }
+      //   if (color.length < 1) {
+      //     color.push(results[i].color)
+      //   }
+      //   color.push(results[i].imgurl);
+      //   if (color.length === 4) {
+      //     colorContainer.push(color);
+      //     color = [];
+      //   }
+      //   if (colorContainer.length === 2) {
+      //     productList.img.push(colorContainer)
+      //   }
+      // }
+      res.status(200).send(results)
     })
   },
   postProduct: (req, res) => {

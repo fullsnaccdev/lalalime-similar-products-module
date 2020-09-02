@@ -22,6 +22,7 @@
     "flickr-sdk": "^3.9.0",
     "mongodb": "^3.3.0",
     "mongoose": "^5.6.10",
+    "newrelic": "^6.13.0",
     "nodemon": "^1.19.1",
     "pg": "^8.3.3",
     "react": "^16.9.0",
