@@ -173,100 +173,13 @@ function writeTenMillionTimesPSQLproducts(writer, encoding, callback) {
 
 //////////////////////////////////// creating image data ///////////////////////////////////////////
 
-const imageProduction = fs.createWriteStream('imageProduction1.csv');
+const imageProduction = fs.createWriteStream('imageProduction6.csv');
 
 // https://lalalimes.s3-us-west-1.amazonaws.com/lalalimeimages/Dresses/product1/color1/Dresses1.jpeg
 
-
-
-// function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
-//   let i = 1;
-//   let id = 1;
-//   let item = 1;
-//   let colorIndex = 1;
-//   write();
-//   function write() {
-//     let ok = true;
-//     do {
-//       const createSimilarProductImg = (id, colorIndex, type, imageNumber) => {
-//         let resultString = `https://tinyurl.com/lalalime-${type}${imageNumber}, color${colorIndex}, ${id}`;
-//         return resultString;
-//       }
-//       let header = "imgurl, color, productID" + "\n";
-
-//       if (i === 1) {
-//         ok = writer.write(header, encoding);
-//         writer.once('drain', write);
-//         for (let j = 1; j < 25; j++) {
-//           const data = createSimilarProductImg(id, colorIndex, 'Shorts', j) + '\n';
-//           ok = writer.write(data, encoding);
-//           item++;
-//           if (item > 3) {
-//             colorIndex++;
-//             item = 1;
-//           }
-//           if (colorIndex > 2) {
-//             colorIndex = 1;
-//             id++;
-//           }
-//         }
-//       }
-
-//       i++;
-//       // id++;
-
-//       if (i === 20) {
-//         // Last time!
-//         for (let j = 1; j < 25; j++) {
-//           if (j === 24) {
-//             console.log('you are free!');
-//             const data = createSimilarProductImg(id, colorIndex, 'Shorts', j) + '\n';
-//             ok = writer.write((data.slice(0, -1)), encoding, callback);
-//           } else {
-//             const data = createSimilarProductImg(id, colorIndex, 'Shorts', j) + '\n';
-//             ok = writer.write(data, encoding);
-//             item++;
-//             if (item > 3) {
-//               colorIndex++;
-//               item = 1;
-//             }
-//             if (colorIndex > 2) {
-//               colorIndex = 1;
-//               id++;
-//             }
-//           }
-//         }
-
-//       } else {
-//         // See if we should continue, or wait.
-//         // Don't pass the callback, because we're not done yet.
-//         for (let j = 1; j < 25; j++) {
-//           const data = createSimilarProductImg(id, colorIndex, 'Shorts', j) + '\n';
-//           ok = writer.write(data, encoding);
-//           item++;
-//           if (item > 3) {
-//             colorIndex++;
-//             item = 1;
-//           }
-//           if (colorIndex > 2) {
-//             colorIndex = 1;
-//             id++;
-//           }
-//         }
-//       }
-//     } while (i < 19 && ok);
-//     if (i < 19) {
-//       // Had to stop early!
-//       // Write some more once it drains.
-//       writer.once('drain', write);
-//     }
-//   }
-// }
-
-
 function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
   // let i = 1;
-  let id = 1;
+  let id = 10000001;
   let item = 1;
   let colorIndex = 1;
   write();
@@ -279,11 +192,10 @@ function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
       }
       let header = "imgurl, color, productID" + "\n";
 
-      if (id === 1) {
+      if (id === 10000001) {
         ok = writer.write(header, encoding);
-        // writer.once('drain', write);
         for (let j = 1; j < 25; j++) {
-          const data = createSimilarProductImg(id, colorIndex, 'Shorts', j) + '\n';
+          const data = createSimilarProductImg(id, colorIndex, 'Sweaters', j) + '\n';
           ok = writer.write(data, encoding);
           item++;
           if (item > 3) {
@@ -298,17 +210,15 @@ function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
       }
 
       for (let j = 1; j < 25; j++) {
-        if (id === 2000 && j === 24) {
+        if (id === 12000000 && j === 24) {
           console.log('you are free');
-          const data = createSimilarProductImg(id, colorIndex, 'Shorts', j);
+          const data = createSimilarProductImg(id, colorIndex, 'Sweaters', j);
           ok = writer.write(data, encoding, callback);
         } else {
-          if (id === 2001) {
+          if (id === 12000001) {
             break;
           }
-          // console.log('id: ', id)
-          // console.log('j: ', j)
-          const data = createSimilarProductImg(id, colorIndex, 'Shorts', j) + '\n';
+          const data = createSimilarProductImg(id, colorIndex, 'Sweaters', j) + '\n';
           ok = writer.write(data, encoding);
           item++;
           if (item > 3) {
@@ -319,13 +229,13 @@ function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
             colorIndex = 1;
             id++;
           }
-          if (id > 2000) {
+          if (id > 12000000) {
             console.log('this does not make any sense');
           }
         }
       }
-    } while (id < 1999 && ok);
-    if (id < 1999) {
+    } while (id < 11999999 && ok);
+    if (id < 11999999) {
       writer.once('drain', write);
     }
   }

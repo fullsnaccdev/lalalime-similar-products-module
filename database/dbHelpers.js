@@ -20,6 +20,74 @@ const dbHelpers = {
       }
       callback(null, results);
     })
-  }
+  },
+  postProduct: (req, callback) => {
+    let { property, type, title, price } = req.body;
+    let queryString = `INSERT INTO products (property, type, title, price) VALUES ('${property}', '${type}', '${title}', '${price}')`;
+    db.query(queryString, (err, result) => {
+      if (err) {
+        callback(err);
+      }
+      callback(null, result);
+    })
+  },
+  postImage: (req, callback) => {
+    let { imgurl, color, productID } = req.body;
+    let queryString = `INSERT INTO images (imgurl, color, productid) VALUES ('${imgurl}', '${color}', '${productID}')`;
+    db.query(queryString, (err, result) => {
+      if (err) {
+        callback(err);
+      }
+      callback(null, result);
+    })
+  },
+  update: (req, callback) => {
+
+    let queryString = ``;
+
+  },
+  deleteProduct: (req, callback) => {
+    let { id } = req.params;
+    let queryString = `DELETE FROM products WHERE id = ${id}`;
+    db.query(queryString, (err, result) => {
+      if (err) {
+        callback(err);
+      }
+      callback(null, result);
+    })
+  },
+  deleteImage: (req, callback) => {
+    let { id } = req.params;
+    let queryString = `DELETE FROM images WHERE id = ${id}`;
+    db.query(queryString, (err, result) => {
+      if (err) {
+        callback(err);
+      }
+      callback(null, result);
+    })
+  },
+  updateProduct: (req, callback) => {
+    let { id } = req.params;
+    let { property, type, title, price } = req.body;
+    let queryString = `UPDATE products SET property = '${property}', type = '${type}', title = '${title}', price = '${price}' WHERE id = ${id}`;
+    db.query(queryString, (err, result) => {
+      if (err) {
+        callback(err);
+      }
+      callback(null, result);
+    })
+  },
+  updateImage: (req, callback) => {
+    let { id } = req.params;
+    let { imgurl, color, productID } = req.body;
+    let queryString = `UPDATE images SET imgurl = '${imgurl}', color = '${color}', productid = '${productID}' WHERE id = ${id}`;
+    db.query(queryString, (err, result) => {
+      if (err) {
+        callback(err);
+      }
+      callback(null, result);
+    })
+  },
+
 }
 module.exports = dbHelpers;
