@@ -76,7 +76,7 @@ body {
 .hovPic1:hover + .swatch-bg {
  position: absolute;
  display: block;
- bottom: 0; 
+ bottom: 0;
  background-color: white;
  width: 300px;
  height: 65px;
@@ -86,7 +86,7 @@ body {
 .hovPic2:hover + .swatch-bg {
  position: absolute;
  display: block;
- bottom: 0; 
+ bottom: 0;
  background-color: white;
  width: 300px;
  height: 65px;
@@ -96,7 +96,7 @@ body {
 .hovPic3:hover + .swatch-bg {
  position: absolute;
  display: block;
- bottom: 0; 
+ bottom: 0;
  background-color: white;
  width: 300px;
  height: 65px;
@@ -106,7 +106,7 @@ body {
 .hovPic4:hover + .swatch-bg {
  position: absolute;
  display: block;
- bottom: 0; 
+ bottom: 0;
  background-color: white;
  width: 300px;
  height: 65px;
@@ -116,7 +116,7 @@ body {
 .swatch-bg {
  position: absolute;
  display: none;
- bottom: 0; 
+ bottom: 0;
  background-color: white;
  width: 300px;
  height: 65px;
@@ -126,7 +126,7 @@ body {
 .swatch-bg:hover {
  position: absolute;
  display: block;
- bottom: 0; 
+ bottom: 0;
  background-color: white;
  width: 300px;
  height: 65px;
@@ -138,8 +138,8 @@ body {
  border: 1px solid transparent;
  padding: 2px !important;
  width: 52px !important;
- height: 26px !important;
- margin-top: 17px !important;
+ height: 47px !important;
+ margin-top: 9px !important;
  margin-bottom: 17px !important;
  margin-left: 3px !important;
 }
@@ -222,7 +222,7 @@ body {
 .product-name {
  font-family: Calibre, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
  font-size: 20px;
- font-weight: 600; 
+ font-weight: 600;
  color: black;
 }
 
@@ -246,7 +246,7 @@ body {
  font-family: Calibre, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
  font-size: 18px;
  text-align: left;
- font-weight: 300; 
+ font-weight: 300;
  line-height: 24px;
 }
 

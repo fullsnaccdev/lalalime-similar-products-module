@@ -59,3 +59,14 @@ typings/
 
 # next.js build output
 .next
+
+# megafiles
+megafile1.json
+megafile2.json
+megafile3.json
+megafile4.json
+megafile5.json
+megafile6.json
+*.csv
+
+newrelic.js

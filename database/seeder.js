@@ -1,11 +1,23 @@
+// this is the old seed file. do not use
+
+
 const Lalalime = require('./index.js');
 const faker = require('faker');
+const fs = require('file-system');
+const clothing = fs.createWriteStream('megafile1.json');
+
 
 // data
 const price = ['$38.00 USD', '$48.00 USD', '$58.00 USD', '$68.00 USD','$78.00 USD','$88.00 USD','$98.00 USD','$108.00 USD','$118.00 USD','$128.00 USD','$138.00 USD'];
 const name = ['F.O.M.O', 'Fast and Free', 'Rule the Day', 'Align', 'Spring Break Away', 'On the Fly', 'Everyday', 'All the Right Places','Sun Setter', 'Ebb to the Street', 'Define', 'All Yours', 'Energy', 'Free to be Serene'];
-
-
+const type = ['Tanks', 'Pants', 'Dresses', 'Sweaters', 'Skirts', 'Shorts'];
+const findCategory = (type) => {
+  if(type === 'Tanks' || type === 'Dresses' || type === 'Sweaters') {
+    return 'top';
+  }
+  return 'bottom';
+}
+///////////////////////////////////// mongo functions ////////////////////////////////////////////
 // function randomizer for title
 const createTitle = (name) => {
   name.sort(() => Math.random() -0.5);
@@ -21,1013 +33,271 @@ const createPrice = () => {
   return arr;
 };
 
-// functions for creating the product
-// const createDresses = (name) => {
-//   let product = {};
-//   product.property = 'top';
-//   product.type = 'Dresses';
-//   product.title = createTitle(name);
-//   product.price = createPrice();
-//   product.img = [
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Cinch+It+Dress/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Cinch+It+Dress/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Cinch+It+Dress/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/black/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/beige-pink/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/beige-pink/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/beige-pink/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/purple/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/purple/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/purple/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/silky-white/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/silky-white/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/inner-glow/silky-white/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Black/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Bordeaux+Drama/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Bordeaux+Drama/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Bordeaux+Drama/3.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/almost+blue/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/almost+blue/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/almost+blue/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/night-black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/night-black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/night-black/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/white/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/white/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/white/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/Heathered+Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/Heathered+Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/Heathered+Black/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/Heathered+Medium+Grey/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/Heathered+Medium+Grey/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/Heathered+Medium+Grey/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/moonwalk/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/moonwalk/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/moonwalk/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/red/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/red/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/red/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/riverstone/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/riverstone/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Refresh+Maxi+Dress+II/riverstone/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/night-black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/night-black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/night-black/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/white/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/white/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/white/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Black/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/almost+blue/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/almost+blue/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/almost+blue/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Bordeaux+Drama/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Bordeaux+Drama/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/dresses/Here+To+There+Dress/Bordeaux+Drama/3.jpg"
-//       ]
-
-//     ],
-//   ];
-//   return product;
-// };
-
-// tank
-// const createTanks = (name) => {
-//   let product = {};
-//   product.property = 'top';
-//   product.type = 'Tanks';
-//   product.title = createTitle(name);
-//   product.price = createPrice();
-//   product.img = [
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Black/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Clay/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Clay/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Clay/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Coral/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Coral/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Coral/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/White/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/White/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/White/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/tempest+blue/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/tempest+blue/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/tempest+blue/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/Black/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/Frosted+Mulberry/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/Frosted+Mulberry/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/Frosted+Mulberry/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/Heartthrob/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/Heartthrob/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/Heartthrob/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/White/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/White/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/White/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/aqua+blue/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/aqua+blue/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Run+Off-Route+Tank/aqua+blue/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Black/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Clay/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Clay/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Clay/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Coral/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Coral/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/Rustic+Coral/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/White/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/White/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/White/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/tempest+blue/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/tempest+blue/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Ebb+To+Street+Tank+II/tempest+blue/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/Black/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/Light+Coral/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/Light+Coral/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/Light+Coral/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/Polar+Shift+Alpine+White+Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/Polar+Shift+Alpine+White+Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/Polar+Shift+Alpine+White+Black/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/True+Navy/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/True+Navy/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/True+Navy/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/White/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/White/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/tanktops/Sculpt+Tank+II/White/2.jpg"
-//       ]
-//     ],
-//   ];
-//   return product;
-// };
-
-// sweater
-// const createSweaters = (name) => {
-//   let product = {};
-//   product.property = 'top';
-//   product.type = 'Sweaters';
-//   product.title = createTitle(name);
-//   product.price = createPrice();
-//   product.img = [
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Arctic+Plum/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Arctic+Plum/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Arctic+Plum/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Black/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Heathered+Everglades/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Heathered+Everglades/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Heathered+Everglades/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Mystic+Iris/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Mystic+Iris/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Mystic+Iris/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/White/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/White/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/White/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Angel+Wing/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Angel+Wing/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Angel+Wing/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Black+Cherry/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Black+Cherry/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Black+Cherry/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Heathered+Dark+Olive/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Heathered+Dark+Olive/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Heathered+Dark+Olive/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Heathered+Plum/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Heathered+Plum/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Heathered+Plum/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Heathered+Starlight/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Heathered+Starlight/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Sit+In+Lotus+Wrap+II/Heathered+Starlight/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/Heathered+Night+Diver/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/Heathered+Night+Diver/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/Heathered+Night+Diver/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/chrome/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/chrome/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/chrome/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/heathered+marvel/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/heathered+marvel/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/heathered+marvel/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/light+grey/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/light+grey/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/light+grey/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/smoky+blush/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/smoky+blush/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba/smoky+blush/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Arctic+Plum/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Arctic+Plum/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Arctic+Plum/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Black/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Heathered+Everglades/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Heathered+Everglades/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Heathered+Everglades/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Mystic+Iris/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Mystic+Iris/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/Mystic+Iris/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/White/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/White/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/sweaters/Scuba+Hoodie/White/2.jpg"
-//       ]
-//     ],
-//   ];
-//   return product;
-// };
-
-// skirt
-// const createSkirts = (name) => {
-//   let product = {};
-//   product.property = 'bottom';
-//   product.type = 'Skirts';
-//   product.title = createTitle(name);
-//   product.price = createPrice();
-//   product.img = [
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Cherry+Cola/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Cherry+Cola/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Cherry+Cola/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Frontier/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Frontier/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Frontier/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Grey+Sage/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Grey+Sage/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Grey+Sage/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Silverstone/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Silverstone/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Silverstone/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/black/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/White/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/White/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/White/3.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/butter+pink/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/butter+pink/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/butter+pink/3.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Jet+Stream/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Jet+Stream/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Jet+Stream/3.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Black/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Black/3.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/marvel/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/marvel/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/marvel/3.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Merlot/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Merlot/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/Merlot/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/heathered+white/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/heathered+white/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/heathered+white/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/mulberry/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/mulberry/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/mulberry/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/navy/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/navy/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/navy/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/olive/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/olive/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/On+the+Fly+Skirt/olive/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Black/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Black/3.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Jet+Stream/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Jet+Stream/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/Jet+Stream/3.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/White/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/White/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/White/3.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/marvel/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/marvel/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/marvel/3.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/butter+pink/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/butter+pink/2.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/skirts/Pace+Rival+Skirt+(Tall)/butter+pink/3.jpg"
-//       ]
-//     ],
-//   ];
-//   return product;
-// };
-
-// shorts
-// const createShorts = (name) => {
-//   let product = {};
-//   product.property = 'bottom';
-//   product.type = 'Shorts';
-//   product.title = createTitle(name);
-//   product.price = createPrice();
-//   product.img = [
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Black/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Dark+Adobe/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Dark+Adobe/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Dark+Adobe/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Dark+Olive/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Dark+Olive/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Dark+Olive/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Incognito+Camo+Multi+Gator+Green/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Incognito+Camo+Multi+Gator+Green/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/Incognito+Camo+Multi+Gator+Green/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/tempest+blue/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/tempest+blue/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/In+Movement+Short+2.5/tempest+blue/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Amber+Aura/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Amber+Aura/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Amber+Aura/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Formation+Camo+Deep+Coal+Multi+Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Formation+Camo+Deep+Coal+Multi+Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Formation+Camo+Deep+Coal+Multi+Black/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/HeartThrob/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/HeartThrob/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/HeartThrob/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Jet+Stream/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Jet+Stream/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Jet+Stream/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Vitalize+MultiBlack/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Vitalize+MultiBlack/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Hotty+Hot+Short+II+2.5/Vitalize+MultiBlack/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Aquatic+Green/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Aquatic+Green/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Aquatic+Green/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Heartthrob/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Heartthrob/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Heartthrob/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Intergalactic/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Intergalactic/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Intergalactic/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Pink+Shell/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Pink+Shell/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/Pink+Shell/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/True+Navy/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/True+Navy/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/Speed+Up+Short+Long+4+updated+fit/True+Navy/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Frosted+Mulberry/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Frosted+Mulberry/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Frosted+Mulberry/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Heather+Lux+Multi+Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Heather+Lux+Multi+Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Heather+Lux+Multi+Black/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Jet+Stream/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Jet+Stream/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Jet+Stream/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Heather+Lux+Multi+Black/4.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Heather+Lux+Multi+Black/6.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/Heather+Lux+Multi+Black/5.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/White/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/White/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/shorts/TrackerShortV4/White/2.jpg"
-//       ]
-//     ],
-//   ];
-//   return product;
-// };
-
-// pants
-// const createPants = (name) => {
-//   let product = {};
-//   product.property = 'bottom';
-//   product.type = 'Pants';
-//   product.title = createTitle(name);
-//   product.price = createPrice();
-//   product.img = [
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Aquatic+Green/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Aquatic+Green/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Aquatic+Green/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Dark+Adobe/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Dark+Adobe/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Dark+Adobe/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Melanite/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Melanite/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Melanite/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Tempest+Blue/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Tempest+Blue/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Tempest+Blue/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Titanium/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Titanium/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Align+Pant+II+25/Titanium/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Black/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Chambray/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Chambray/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Chambray/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Dark+Olive/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Dark+Olive/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Dark+Olive/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Night+Diver/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Night+Diver/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Night+Diver/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Plum+Shadow/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Plum+Shadow/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Free-pants/Plum+Shadow/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Everglades/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Everglades/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Everglades/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Moonwalk/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Moonwalk/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Moonwalk/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Plumful/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Plumful/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Plumful/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Titanium/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Titanium/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/Titanium/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/True+Navy/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/True+Navy/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/In+Movement+Tight+25+Everlux/True+Navy/2.jpg"
-//       ]
-//     ],
-//     [
-//       [
-//         "color1",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/Black/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/Black/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/Black/2.jpg"
-//       ],
-//       [
-//         "color2",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/Formation+Camo+Deep+Coal+Multi/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/Formation+Camo+Deep+Coal+Multi/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/Formation+Camo+Deep+Coal+Multi/2.jpg"
-//       ],
-//       [
-//         "color3",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/Rustic+Coral/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/Rustic+Coral/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/Rustic+Coral/2.jpg"
-//       ],
-//       [
-//         "color4",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/True+Navy/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/True+Navy/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/True+Navy/2.jpg"
-//       ],
-//       [
-//         "color5",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/White/1.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/White/3.jpg",
-//         "https://lalalime-similar.s3-us-west-1.amazonaws.com/pants/Wunder+Under+High-Rise+Tight+25+Full-On+Luxtreme/White/2.jpg"
-//       ]
-//     ],
-//   ];
-//   return product;
-// };
-
-// new functions
-const createDresses = (name) => {
-  let product = {};
-  product.property = 'top';
-  product.type = 'Dresses';
-  product.title = createTitle(name);
-  product.price = createPrice();
-  product.img = [];
+const createSimilarProductsLine = (type, index) => {
+  let productsLine = {};
+  productsLine.index = index;
+  productsLine.property = findCategory(type);
+  productsLine.type = type;
+  productsLine.title = createTitle(name);
+  productsLine.price = createPrice();
+  productsLine.img = [];
   for (let i = 1; i < 5; i++) {
     let item = [];
-    for (let j = 1; j < 6; j++) {
+    for (let j = 1; j < 3; j++) {
       let colors = [];
       colors.push(`color${j}`);
       colors.push(faker.image.fashion());
       colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
       item.push(colors);
     }
-    product.img.push(item);
+    productsLine.img.push(item);
   }
-  return product;
+  return productsLine;
 };
 
-const createTanks = (name) => {
-  let product = {};
-  product.property = 'top';
-  product.type = 'Tanks';
-  product.title = createTitle(name);
-  product.price = createPrice();
-  product.img = [];
-  for (let i = 1; i < 5; i++) {
-    let item = [];
-    for (let j = 1; j < 6; j++) {
-      let colors = [];
-      colors.push(`color${j}`);
-      colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
-      item.push(colors);
+function writeTenMillionTimes(writer, encoding, callback) {
+  let i = 1999999;
+  let id = 10000001;
+  write();
+  function write() {
+    let ok = true;
+    do {
+      // for postgreSQL csv version
+      // let header = "id, property, type, title, price" + "\n";
+
+      if (i === 1999999) {
+        // // creating an entry with a random type i.e. "Shorts", "Pants", etc.
+        // const data = JSON.stringify(createSimilarProductsLine(type[Math.floor(Math.random() * Math.floor(type.length))], i + 11)) + ',\n';
+
+        // creating an entry with a specific type i.e. "Shorts"
+        const data = JSON.stringify(createSimilarProductsLine("Sweaters", id)) + ',\n';
+        ok = writer.write('[' + data, encoding)
+      }
+      i--;
+      id++;
+      // // creating an entry with a random type i.e. "Shorts", "Pants", etc.
+      // const data = JSON.stringify(createSimilarProductsLine(type[Math.floor(Math.random() * Math.floor(type.length))], i + 11)) + ',\n';
+
+      // creating an entry with a specific type i.e. "Shorts"
+      const data = JSON.stringify(createSimilarProductsLine("Sweaters", id)) + ',\n';
+      if (i === 0) {
+        // Last time!
+        console.log('you are free!');
+        writer.write((data.slice(0, -2) + ']'), encoding, callback);
+      } else {
+        // See if we should continue, or wait.
+        // Don't pass the callback, because we're not done yet.
+        ok = writer.write(data, encoding);
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
+      // Had to stop early!
+      // Write some more once it drains.
+      writer.once('drain', write);
     }
-    product.img.push(item);
   }
-  return product;
+}
+// writeTenMillionTimes(clothing, 'utf-8', () => clothing.end());
+
+// import command for mongo data
+// mongoimport -d lalalime -c similarproducts --file megafile1.json --jsonArray
+
+///////////////////////////////////// postgreSQL functions ////////////////////////////////////////////
+
+// function randomizer for title (only one item)
+const createTitleForOne = (name) => {
+  name.sort(() => Math.random() -0.5);
+  return name[0];
 };
 
-const createSweaters = (name) => {
-  let product = {};
-  product.property = 'top';
-  product.type = 'Sweaters';
-  product.title = createTitle(name);
-  product.price = createPrice();
-  product.img = [];
-  for (let i = 1; i < 5; i++) {
-    let item = [];
-    for (let j = 1; j < 6; j++) {
-      let colors = [];
-      colors.push(`color${j}`);
-      colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
-      item.push(colors);
+// function randomizer for price (only one item)
+const createPriceForOne = () => {
+  return price[Math.floor(Math.random() * Math.floor(price.length))];
+};
+
+const createSimilarProduct = (type) => {
+  var resultString = `${findCategory(type)}, ${type}, ${createTitleForOne(name)}, ${createPriceForOne()}`;
+  return resultString;
+};
+
+// const createSimilarProductImg = (index, colorIndex) => {
+//   let resultString = `${faker.image.image()}, color${colorIndex}, ${index}`;
+//   return resultString;
+// }
+
+
+//////////////////////////////////// creating product data ///////////////////////////////////////////
+
+
+const production = fs.createWriteStream('production6.csv');
+
+function writeTenMillionTimesPSQLproducts(writer, encoding, callback) {
+  let i = 1999999;
+  write();
+  function write() {
+    let ok = true;
+    do {
+      // for postgreSQL csv version
+      // let header = "id, property, type, title, price" + "\n";
+      let header = "property, type, title, price" + "\n";
+      if (i === 1999999) {
+
+        // creating an entry with a specific type i.e. "Shorts"
+        ok = writer.write(header, encoding)
+        const data = createSimilarProduct("Sweaters") + '\n';
+        ok = writer.write(data, encoding)
+      }
+      i--;
+
+      // creating an entry with a specific type i.e. "Shorts"
+      const data = createSimilarProduct("Sweaters") + '\n';
+      if (i === 0) {
+        // Last time!
+        console.log('you are free!');
+        writer.write((data.slice(0, -2)), encoding, callback);
+      } else {
+        // See if we should continue, or wait.
+        // Don't pass the callback, because we're not done yet.
+        ok = writer.write(data, encoding);
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
+      // Had to stop early!
+      // Write some more once it drains.
+      writer.once('drain', write);
     }
-    product.img.push(item);
   }
-  return product;
-};
-
-const createSkirts = (name) => {
-  let product = {};
-  product.property = 'bottom';
-  product.type = 'Skirts';
-  product.title = createTitle(name);
-  product.price = createPrice();
-  product.img = [];
-  for (let i = 1; i < 5; i++) {
-    let item = [];
-    for (let j = 1; j < 6; j++) {
-      let colors = [];
-      colors.push(`color${j}`);
-      colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
-      item.push(colors);
-    }
-    product.img.push(item);
-  }
-  return product;
-};
-
-const createShorts = (name) => {
-  let product = {};
-  product.property = 'bottom';
-  product.type = 'Shorts';
-  product.title = createTitle(name);
-  product.price = createPrice();
-  product.img = [];
-  for (let i = 1; i < 5; i++) {
-    let item = [];
-    for (let j = 1; j < 6; j++) {
-      let colors = [];
-      colors.push(`color${j}`);
-      colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
-      item.push(colors);
-    }
-    product.img.push(item);
-  }
-  return product;
-};
-
-const createPants = (name) => {
-  let product = {};
-  product.property = 'bottom';
-  product.type = 'Pants';
-  product.title = createTitle(name);
-  product.price = createPrice();
-  product.img = [];
-  for (let i = 1; i < 5; i++) {
-    let item = [];
-    for (let j = 1; j < 6; j++) {
-      let colors = [];
-      colors.push(`color${j}`);
-      colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
-      colors.push(faker.image.fashion());
-      item.push(colors);
-    }
-    product.img.push(item);
-  }
-  return product;
-};
-
-const bottomProducts = () => {
-  let botProductsArr = [];
-  for (let i = 0; i < 20; i++) {
-    botProductsArr.push(createShorts(name));
-    botProductsArr.push(createPants(name));
-    botProductsArr.push(createSkirts(name));
-  }
-  return botProductsArr;
 }
 
-const topProducts = () => {
-  let topProductsArr = [];
-  for (let i = 0; i < 20; i++) {
-    topProductsArr.push(createDresses(name));
-    topProductsArr.push(createTanks(name));
-    topProductsArr.push(createSweaters(name));
-  }
-  return topProductsArr;
-}
+// writeTenMillionTimesPSQLproducts(production, 'utf-8', () => production.end());
 
-const combineProducts = () => {
-  let bottData = bottomProducts();
-  let topData = topProducts()
-  return [...bottData, ...topData];
+// \copy products (property, type, title, price) from production1.csv DELIMITER ',' CSV HEADER;
+
+
+//////////////////////////////////// creating image data ///////////////////////////////////////////
+
+const imageProduction = fs.createWriteStream('imageProduction6.csv');
+
+// https://lalalimes.s3-us-west-1.amazonaws.com/lalalimeimages/Dresses/product1/color1/Dresses1.jpeg
+
+function writeTenMillionTimesPSQLimg(writer, encoding, callback) {
+  // let i = 1;
+  let id = 10000001;
+  let item = 1;
+  let colorIndex = 1;
+  write();
+  function write() {
+    let ok = true;
+    do {
+      const createSimilarProductImg = (id, colorIndex, type, imageNumber) => {
+        let resultString = `https://tinyurl.com/lalalime-${type}${imageNumber}, color${colorIndex}, ${id}`;
+        return resultString;
+      }
+      let header = "imgurl, color, productID" + "\n";
+
+      if (id === 10000001) {
+        ok = writer.write(header, encoding);
+        for (let j = 1; j < 25; j++) {
+          const data = createSimilarProductImg(id, colorIndex, 'Sweaters', j) + '\n';
+          ok = writer.write(data, encoding);
+          item++;
+          if (item > 3) {
+            colorIndex++;
+            item = 1;
+          }
+          if (colorIndex > 2) {
+            colorIndex = 1;
+            id++;
+          }
+        }
+      }
+
+      for (let j = 1; j < 25; j++) {
+        if (id === 12000000 && j === 24) {
+          console.log('you are free');
+          const data = createSimilarProductImg(id, colorIndex, 'Sweaters', j);
+          ok = writer.write(data, encoding, callback);
+        } else {
+          if (id === 12000001) {
+            break;
+          }
+          const data = createSimilarProductImg(id, colorIndex, 'Sweaters', j) + '\n';
+          ok = writer.write(data, encoding);
+          item++;
+          if (item > 3) {
+            colorIndex++;
+            item = 1;
+          }
+          if (colorIndex > 2) {
+            colorIndex = 1;
+            id++;
+          }
+          if (id > 12000000) {
+            console.log('this does not make any sense');
+          }
+        }
+      }
+    } while (id < 11999999 && ok);
+    if (id < 11999999) {
+      writer.once('drain', write);
+    }
+  }
 }
 
 
-// seeding data
-const insertData = () => {
-  Lalalime.insertMany(combineProducts())
-  .then(() => console.log('db seeded'))
-  .catch((err) => console.log('seed err', err))
-}
+writeTenMillionTimesPSQLimg(imageProduction, 'utf-8', () => console.log('end!!') || imageProduction.end());
 
-insertData();
 
+// \copy images (imgurl, color, productID) from imageProduction1.csv DELIMITER ',' CSV HEADER;
+
+
+
+////////////////////////////////////////////// seeding data /////////////////////////////////////////////////
+// const insertData = () => {
+//   Lalalime.insertMany(combineProducts())
+//   .then(() => console.log('db seeded'))
+//   .catch((err) => console.log('seed err', err))
+// }
+
+// insertData();
+
+
+
+
+// decrease the number of colors to 1 or 2 and move it up to the next level
+
+//create product function
+// const createSimilarProductsLine = (property, type) => {
+//   let productsLine = {};
+//   productsLine.property = property;
+//   productsLine.type = type;
+//   productsLine.title = createTitle(name);
+//   productsLine.price = createPrice();
+//   productsLine.img = [];
+//   for (let i = 1; i < 5; i++) {
+//     let item = [];
+//     for (let j = 1; j < 6; j++) {
+//       let colors = [];
+//       colors.push(`color${j}`);
+//       colors.push(faker.image.fashion());
+//       colors.push(faker.image.fashion());
+//       colors.push(faker.image.fashion());
+//       item.push(colors);
+//     }
+//     productsLine.img.push(item);
+//   }
+//   return productsLine;
+// };
+
+// const combineProducts = () => {
+//   let allProducts = [];
+//   for (let i = 0; i < 1; i++) {
+//     allProducts.push(createSimilarProductsLine('bottom', 'Shorts'));
+//     // allProducts.push(createSimilarProductsLine('bottom', 'Pants'));
+//     // allProducts.push(createSimilarProductsLine('bottom', 'Skirts'));
+//     // allProducts.push(createSimilarProductsLine('top', 'Dresses'));
+//     // allProducts.push(createSimilarProductsLine('top', 'Tanks'));
+//     // allProducts.push(createSimilarProductsLine('top', 'Sweaters'));
+//   }
+//   return allProducts;
+// };

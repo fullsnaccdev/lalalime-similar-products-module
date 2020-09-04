@@ -12,6 +12,7 @@ class App extends Component {
       title: [],
       price: [],
       img: [],
+      id: window.location.pathname.slice(1, -1)
     }
     this.getComponents = this.getComponents.bind(this);
   }
@@ -22,14 +23,42 @@ class App extends Component {
 
   getComponents() {
     axios
-    .get('/api/similar_products')
+    .get(`/api/similar_products/${this.state.id}`)
     .then((res) => {
-      let idx = Math.floor(Math.random() * 60)
+      // console.log(res.data.rows);
+      let productList = {};
+      productList.id = [];
+      productList.title = [];
+      productList.price = [];
+      productList.img = [];
+      let img;
+      let color = [];
+      let colorContainer = [];
+      let results = res.data.rows
+      for (let i = 0; i < results.length; i++) {
+        if (i === 0 || i === 6 || i === 12 || i === 18) {
+          productList.id.push(results[i].productid);
+          productList.title.push(results[i].title);
+          productList.price.push(results[i].price);
+          colorContainer = [];
+        }
+        if (color.length < 1) {
+          color.push(results[i].color)
+        }
+        color.push(results[i].imgurl);
+        if (color.length === 4) {
+          colorContainer.push(color);
+          color = [];
+        }
+        if (colorContainer.length === 2) {
+          productList.img.push(colorContainer)
+        }
+      }
       this.setState({
-      title: res.data[idx]['title'],
-      price: res.data[idx]['price'],
-      img: res.data[idx]['img']
-    }, () => console.log('title', res.data[idx]))})
+      title: productList['title'],
+      price: productList['price'],
+      img: productList['img']
+    }, () => console.log('title from app', productList))})
     .catch((err) => console.log('title',err))
   }
 
