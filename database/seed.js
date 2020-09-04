@@ -42,7 +42,7 @@ const production5 = fs.createWriteStream('production5.csv');
 const production6 = fs.createWriteStream('production6.csv');
 
 function writeTwoMillionTimesPSQLproducts(writer, encoding, callback, clothing) {
-  let i = 199;
+  let i = 1999999;
   write();
   function write() {
     let ok = true;
@@ -50,7 +50,7 @@ function writeTwoMillionTimesPSQLproducts(writer, encoding, callback, clothing) 
       // for postgreSQL csv version
       // let header = "id, property, type, title, price" + "\n";
       let header = "property, type, title, price" + "\n";
-      if (i === 199) {
+      if (i === 1999999) {
 
         // creating an entry with a specific type i.e. "Shorts"
         ok = writer.write(header, encoding)
@@ -165,18 +165,18 @@ function writeTwoMillionTimesPSQLimg(writer, encoding, callback, start, end, clo
 }
 
 
-// writeTwoMillionTimesPSQLimg(imageProduction1, 'utf-8', () => console.log('end!!') || imageProduction1.end(), 1, 2000000, 'Shorts');
-// writeTwoMillionTimesPSQLimg(imageProduction2, 'utf-8', () => console.log('end!!') || imageProduction2.end(), 2000001, 4000000, 'Pants');
-// writeTwoMillionTimesPSQLimg(imageProduction3, 'utf-8', () => console.log('end!!') || imageProduction3.end(), 4000001, 6000000, 'Skirts');
-// writeTwoMillionTimesPSQLimg(imageProduction4, 'utf-8', () => console.log('end!!') || imageProduction4.end(), 6000001, 8000000, 'Dresses');
-// writeTwoMillionTimesPSQLimg(imageProduction5, 'utf-8', () => console.log('end!!') || imageProduction5.end(), 8000001, 10000000, 'Tanks');
-// writeTwoMillionTimesPSQLimg(imageProduction6, 'utf-8', () => console.log('end!!') || imageProduction6.end(), 10000001, 12000000, 'Sweaters');
+writeTwoMillionTimesPSQLimg(imageProduction1, 'utf-8', () => console.log('end!!') || imageProduction1.end(), 1, 2000000, 'Shorts');
+writeTwoMillionTimesPSQLimg(imageProduction2, 'utf-8', () => console.log('end!!') || imageProduction2.end(), 2000001, 4000000, 'Pants');
+writeTwoMillionTimesPSQLimg(imageProduction3, 'utf-8', () => console.log('end!!') || imageProduction3.end(), 4000001, 6000000, 'Skirts');
+writeTwoMillionTimesPSQLimg(imageProduction4, 'utf-8', () => console.log('end!!') || imageProduction4.end(), 6000001, 8000000, 'Dresses');
+writeTwoMillionTimesPSQLimg(imageProduction5, 'utf-8', () => console.log('end!!') || imageProduction5.end(), 8000001, 10000000, 'Tanks');
+writeTwoMillionTimesPSQLimg(imageProduction6, 'utf-8', () => console.log('end!!') || imageProduction6.end(), 10000001, 12000000, 'Sweaters');
 
 
-// small test
-writeTwoMillionTimesPSQLimg(imageProduction1, 'utf-8', () => console.log('end!!') || imageProduction1.end(), 1, 200, 'Shorts');
-writeTwoMillionTimesPSQLimg(imageProduction2, 'utf-8', () => console.log('end!!') || imageProduction2.end(), 201, 400, 'Pants');
-writeTwoMillionTimesPSQLimg(imageProduction3, 'utf-8', () => console.log('end!!') || imageProduction3.end(), 401, 600, 'Skirts');
-writeTwoMillionTimesPSQLimg(imageProduction4, 'utf-8', () => console.log('end!!') || imageProduction4.end(), 601, 800, 'Dresses');
-writeTwoMillionTimesPSQLimg(imageProduction5, 'utf-8', () => console.log('end!!') || imageProduction5.end(), 801, 1000, 'Tanks');
-writeTwoMillionTimesPSQLimg(imageProduction6, 'utf-8', () => console.log('end!!') || imageProduction6.end(), 1001, 1200, 'Sweaters');
+// // small test
+// writeTwoMillionTimesPSQLimg(imageProduction1, 'utf-8', () => console.log('end!!') || imageProduction1.end(), 1, 200, 'Shorts');
+// writeTwoMillionTimesPSQLimg(imageProduction2, 'utf-8', () => console.log('end!!') || imageProduction2.end(), 201, 400, 'Pants');
+// writeTwoMillionTimesPSQLimg(imageProduction3, 'utf-8', () => console.log('end!!') || imageProduction3.end(), 401, 600, 'Skirts');
+// writeTwoMillionTimesPSQLimg(imageProduction4, 'utf-8', () => console.log('end!!') || imageProduction4.end(), 601, 800, 'Dresses');
+// writeTwoMillionTimesPSQLimg(imageProduction5, 'utf-8', () => console.log('end!!') || imageProduction5.end(), 801, 1000, 'Tanks');
+// writeTwoMillionTimesPSQLimg(imageProduction6, 'utf-8', () => console.log('end!!') || imageProduction6.end(), 1001, 1200, 'Sweaters');
