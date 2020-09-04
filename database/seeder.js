@@ -1,3 +1,6 @@
+// this is the old seed file. do not use
+
+
 const Lalalime = require('./index.js');
 const faker = require('faker');
 const fs = require('file-system');
