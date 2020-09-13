@@ -14,6 +14,7 @@ const controller = {
   get: (req, res) => {
     dbHelpers.get(req, (err, results) => {
       if (err) {
+        console.log(err);
         res.status(404).send(err)
       }
       // let productList = {};

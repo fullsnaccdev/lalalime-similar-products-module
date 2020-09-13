@@ -59,7 +59,7 @@ class App extends Component {
       price: productList['price'],
       img: productList['img']
     }, () => console.log('title from app', productList))})
-    .catch((err) => console.log('title',err))
+    .catch((err) => console.log('getComponentsError',err))
   }
 
   render(){
